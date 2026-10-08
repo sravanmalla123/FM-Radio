@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Studio | Wavelength</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="studio">
+<div class="wrap">
+  <header class="studio-top">
+    <a class="logo" href="/">Wavelength</a>
+    <div class="studio-meta">
+      <span id="timer">0:00</span>
+      <span><span id="count">0</span> listening</span>
+      <span class="sign" id="sign"><span class="lamp"></span>On air</span>
+    </div>
+  </header>
+
+  <h1 class="show-title" id="showTitle">Studio</h1>
+
+  <div class="stage">
+    <section class="seats" aria-label="People in the studio">
+      <article class="seat" id="seatHost">
+        <div class="avatar" id="hostAv">?</div>
+        <div>
+          <h2 id="hostName">Host</h2><div class="role">Anchor</div>
+          <canvas id="hostMeter" width="560" height="112"></canvas>
+          <div class="seat-foot"><span class="status" id="hostStatus"><i></i>Not connected</span><span class="muted-chip" id="hostMuted" hidden>Muted</span></div>
+        </div>
+      </article>
+      <article class="seat guest empty" id="seatGuest">
+        <div class="avatar" id="guestAv">+</div>
+        <div>
+          <h2 id="guestName">Waiting for your guest</h2><div class="role">Guest</div>
+          <canvas id="guestMeter" width="560" height="112"></canvas>
+          <div class="seat-foot"><span class="status" id="guestStatus"><i></i>Send them the guest link</span><span class="muted-chip" id="guestMuted" hidden>Muted</span></div>
+        </div>
+      </article>
+    </section>
+
+    <aside class="panel">
+      <button class="btn mic-toggle" id="muteBtn">Mute my mic</button>
+
+      <div id="hostPanel" hidden>
+        <button class="btn pink big" id="liveBtn">Go live</button>
+      </div>
+      <div id="guestPanel" hidden>
+        <p id="guestNote">You're in the guest seat. The host decides when the show goes live.</p>
+        <button class="btn" id="leaveBtn" style="margin-top:.8rem">Leave studio</button>
+      </div>
+
+      <div id="shareBox" hidden>
+        <h3>Invite your guest</h3>
+        <p>They open this link, allow their mic, and they're in.</p>
+        <div class="copy-row"><input type="text" id="guestLink" readonly><button class="btn sun small" data-copy="guestLink">Copy</button></div>
+      </div>
+      <div id="shareBox2" hidden>
+        <h3>Link for listeners</h3>
+        <p>Share it anywhere. Anyone with it can tune in live.</p>
+        <div class="copy-row"><input type="text" id="listenLink" readonly><button class="btn sun small" data-copy="listenLink">Copy</button></div>
+      </div>
+
+      <div class="tips">
+        <h3>Before you start</h3>
+        <ul>
+          <li>Wear headphones so the other voice doesn't leak into your mic.</li>
+          <li>Use Chrome, Edge or Firefox on a computer to host.</li>
+          <li>The recording starts when you go live and saves when you end the show.</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+<div class="react-stage" id="stage" aria-hidden="true"></div>
+<audio id="remoteAudio" autoplay playsinline></audio>
+
+<!-- Lobby -->
+<div class="cover-screen" id="lobby">
+  <div class="lobby-card">
+    <a class="logo" href="/">Wavelength</a>
+    <h1 id="lobbyTitle">Join the studio</h1>
+    <p class="sub" id="lobbySub">Check your mic, then come in.</p>
+    <label class="field"><span>Your name</span><input type="text" id="nameInput" maxlength="40" placeholder="How should we show you?"></label>
+    
+    <div id="localhostOption" hidden style="margin-bottom:1rem">
+      <a class="btn primary small" id="openLocalhostBtn" style="width:100%;text-decoration:none">
+        👉 Switch to localhost:3000 (Enables Mic Instantly)
+      </a>
+    </div>
+
+    <button class="btn sun" id="micBtn">Test my microphone</button>
+    <canvas id="lobbyMeter" width="560" height="112"></canvas>
+    <p id="micStatus" class="sub" style="margin:0 0 1rem">Speak and you should see the bars move.</p>
+    <div style="display:flex;flex-direction:column;gap:.6rem">
+      <button class="btn primary big" id="enterBtn" disabled style="width:100%">Enter studio</button>
+      <button type="button" class="btn small" id="enterNoMicBtn" style="width:100%">Enter without mic (Listen & Control mode)</button>
+    </div>
+  </div>
+</div>
+
+<!-- Fatal / wrap-up -->
+<div class="cover-screen" id="wrap" hidden>
+  <div class="lobby-card">
+    <h1 id="wrapTitle"></h1>
+    <p class="sub" id="wrapText"></p>
+    <div class="dialog-actions" style="justify-content:flex-start">
+      <a class="btn primary" id="wrapPrimary" href="/#episodes">See episodes</a>
+      <a class="btn" href="/">Back home</a>
+    </div>
+  </div>
+</div>
+
+<dialog id="endDlg">
+  <h2>End the show?</h2>
+  <p class="sub">Listeners will be disconnected and the recording is saved as a new episode.</p>
+  <div class="dialog-actions">
+    <button class="btn" id="keepOn">Keep going</button>
+    <button class="btn pink" id="confirmEnd">End show</button>
+  </div>
+</dialog>
+<script src="/js/common.js"></script>
+<script src="/js/studio.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+node_modules/
+.env
+*.log
+recordings/*.webm
+recordings/*.mp3
+recordings/*.wav
+recordings/*.m4a
+recordings/*.ogg
+!recordings/.gitkeep
+data/episodes.json
+!data/.gitkeep
+.DS_Store
+Thumbs.db

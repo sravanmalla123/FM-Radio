@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Listen live | Wavelength</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="wrap nav">
+  <a class="logo" href="/">Wavelength</a>
+  <nav><a href="/#episodes">All episodes</a></nav>
+</header>
+
+<main class="wrap listen-main">
+  <section class="now">
+    <div class="cover" id="cover"></div>
+    <div>
+      <span class="badge" id="badge"><span class="lamp"></span><span id="badgeText">Connecting…</span></span>
+      <h1 id="title">&nbsp;</h1>
+      <p class="people" id="people"></p>
+      <p class="desc" id="desc"></p>
+    </div>
+  </section>
+
+  <section class="deck" id="deck">
+    <canvas id="viz" width="1000" height="300" aria-hidden="true"></canvas>
+    <div class="deck-row">
+      <button class="btn pink big" id="tune">Tune in</button>
+      <label class="vol">Volume <input type="range" id="vol" min="0" max="100" value="90" aria-label="Volume"></label>
+      <div class="deck-stats"><span><b id="count">0</b> listening</span><span id="time">0:00</span></div>
+    </div>
+    <div>
+      <div class="reactions" id="reactions" aria-label="Send a reaction">
+        <button data-e="❤️" aria-label="Heart">❤️</button><button data-e="👏" aria-label="Clap">👏</button><button data-e="😂" aria-label="Laugh">😂</button><button data-e="🔥" aria-label="Fire">🔥</button><button data-e="🎉" aria-label="Celebrate">🎉</button>
+      </div>
+      <div class="react-stage" id="stage" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="note" id="ended" hidden>
+    <h2 id="endedTitle">This show has ended</h2>
+    <p id="endedText">The recording is saved. You can play it any time from the episode list.</p>
+    <a class="btn primary" href="/#episodes">Go to episodes</a>
+  </section>
+</main>
+<audio id="audio" playsinline></audio>
+<script src="/js/common.js"></script>
+<script src="/js/listen.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wavelength: live podcasts with a guest, from anywhere</title>
+<meta name="description" content="Host a live podcast with a remote guest. Listeners tune in live and every show is saved as an episode.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="wrap nav">
+  <a class="logo" href="/">Wavelength</a>
+  <nav>
+    <a href="#live">Live now</a>
+    <a href="#episodes">Episodes</a>
+    <button class="btn" id="openUpload">Upload an episode</button>
+    <button class="btn primary" id="openStart">Start a podcast</button>
+  </nav>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div>
+      <h1>Start a podcast the way you'd start a phone call.</h1>
+      <p class="lead">Invite a guest from anywhere, talk in real time, and let anyone listen live. When you wrap up, the recording is saved and published for you.</p>
+      <div class="hero-actions">
+        <button class="btn primary big" id="openStart2">Start a podcast</button>
+        <a class="btn big" href="#episodes">Listen to episodes</a>
+      </div>
+      <ul class="how">
+        <li><b>You host.</b> Open your studio and send one link to your guest.</li>
+        <li><b>They join.</b> Their voice comes through like a call, with nothing to install.</li>
+        <li><b>Everyone listens.</b> Fans tune in live, then find the episode here afterwards.</li>
+      </ul>
+    </div>
+
+    <aside class="board" id="live" aria-live="polite">
+      <div class="board-head"><span class="lamp" id="boardLamp"></span><span>Live right now</span></div>
+      <div id="liveList"></div>
+      <div class="eq" id="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </aside>
+  </section>
+
+  <section class="wrap" id="episodes">
+    <div class="section-head">
+      <div>
+        <h2>Episodes</h2>
+        <p>Every finished live show lands here, newest first.</p>
+      </div>
+    </div>
+    <div class="episodes" id="epList"></div>
+  </section>
+</main>
+
+<div class="player" id="player" aria-label="Audio player">
+  <div class="wrap player-in">
+    <button class="btn round" id="pBtn" aria-label="Play or pause"><svg viewBox="0 0 24 24" id="pIcon"><path d="M8 5v14l11-7z"/></svg></button>
+    <div class="title" id="pTitle"></div>
+    <div class="seekwrap"><input type="range" id="seek" min="0" max="1000" value="0" aria-label="Seek"></div>
+    <div class="time" id="pTime">0:00</div>
+  </div>
+</div>
+<audio id="audio" preload="metadata"></audio>
+
+<dialog id="startDlg">
+  <form id="startForm">
+    <h2>Set up your show</h2>
+    <p class="sub">You'll get a studio, a guest link and a link for listeners.</p>
+    <label class="field"><span>Show title</span><input type="text" name="title" maxlength="90" required placeholder="Late night with a new founder each week"></label>
+    <label class="field"><span>What's it about? <small>Optional. One or two lines.</small></span><textarea name="description" maxlength="240"></textarea></label>
+    <label class="field"><span>Your name</span><input type="text" name="hostName" maxlength="40" required placeholder="Priya"></label>
+    <p class="error" id="startErr" hidden></p>
+    <div class="dialog-actions">
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button class="btn primary" id="startGo">Open studio</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="uploadDlg">
+  <form id="uploadForm">
+    <h2>Upload an episode</h2>
+    <p class="sub">Already recorded something? Add it to the episode list.</p>
+    <label class="field"><span>Audio file</span><input type="file" name="file" accept="audio/*,.mp3,.wav,.m4a,.ogg,.aac,.webm" required></label>
+    <label class="field"><span>Title</span><input type="text" name="title" maxlength="120" required></label>
+    <label class="field"><span>Host</span><input type="text" name="host" maxlength="40" required></label>
+    <label class="field"><span>Guest <small>Optional</small></span><input type="text" name="guest" maxlength="40"></label>
+    <div class="bar" id="upBar" hidden><i></i></div>
+    <p class="error" id="upErr" hidden></p>
+    <div class="dialog-actions">
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button class="btn primary" id="upGo">Upload episode</button>
+    </div>
+  </form>
+</dialog>
+
+<footer class="wrap foot">Wavelength is a small live podcast studio. Use headphones when you record to keep echo out of your episode.</footer>
+<script src="/js/common.js"></script>
+<script src="/js/index.js"></script>
+</body>
+</html>
